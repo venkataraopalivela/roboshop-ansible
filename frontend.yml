@@ -7,7 +7,6 @@
         name: nginx
         state: installed
 
-
     - name: Copy RoboShop Configuration
       ansible.builtin.copy:
         src: nginx-roboshop.conf
@@ -28,7 +27,6 @@
         src: https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
         dest: /usr/share/nginx/html
         remote_src: yes
-
 
     - name: Restart Nginx
       ansible.builtin.systemd:
