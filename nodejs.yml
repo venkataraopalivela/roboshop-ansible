@@ -1,15 +1,10 @@
-- name: Copy MongoDB yum repo file
-  ansible.builtin.copy:
-    src: mongo.repo
-    dest: /etc/yum.repos.d/mongo.repo
-
 - name: install NodeJS Repos
   ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 
 - name: install NodeJS
   ansible.builtin.yum:
     Name: Nodejs
-    state: installed
+    state: Installed
 
 - name: App Pre-requisites
   ansible.builtin.import_tasks: app-preq.yml
@@ -18,4 +13,10 @@
   ansible.builtin.shell: npm install
   args:
     chdir: /app
+
+- name: Schema Setup
+  ansible.builtin.import_tasks: mongo-schema.yml
+
+- name: SystemD Setup
+  ansible.builtin.import_tasks: systemd-setup.yml
 
