@@ -1,0 +1,10 @@
+- name: shipping Setup
+  hosts: all
+  become: yes
+  vars:
+    component: shipping
+    schema: true
+  tasks:
+    - name: Java setup
+      ansible.builtin.import_tasks: java.yml
+
